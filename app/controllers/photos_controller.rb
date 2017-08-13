@@ -1,6 +1,6 @@
 class PhotosController < ApplicationController
   
-  skip_before_action :authenticate_user!, :only => [:index, :show]    # whitelists those actions from the overarching authenticate_user command in application_controller
+  # skip_before_action :authenticate_user!, :only => [:index, :show]    # whitelists those actions from the overarching authenticate_user command in application_controller
     
   def favorites
     @photos = current_user.liked_photos
