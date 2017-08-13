@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # get "/", :controller => "photos", :action => "index"  replaced by shortcut below
   
   root "photos#index"
+  devise_for :users
   
   # Routes for the Comment resource:
   # CREATE
@@ -55,7 +56,6 @@ Rails.application.routes.draw do
   get "/delete_photo/:id", :controller => "photos", :action => "destroy"
   #------------------------------
 
-  devise_for :users
   
   # Routes for the Users resource:
   # READ

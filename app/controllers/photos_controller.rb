@@ -31,7 +31,7 @@ class PhotosController < ApplicationController
 
     @photo.caption = params[:caption]
     @photo.image = params[:image]
-    @photo.user_id = current_user.id      # protects against user passing another user's id in the params by looking id up directly server side
+    @photo.user_id = current_user.id      # By looking id up directly server side, protects against user passing another user's id in the params
 
     save_status = @photo.save
 
@@ -53,7 +53,7 @@ class PhotosController < ApplicationController
 
     @photo.caption = params[:caption]
     @photo.image = params[:image]
-    @photo.user_id = params[:user_id]
+    @photo.user_id = current_user.id
 
     save_status = @photo.save
 
