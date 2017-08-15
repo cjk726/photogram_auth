@@ -34,15 +34,22 @@
     
     <!--i think you need to add an if statement here   -->
 
-       <% photo.likes.each do |like| %> 
+      <% photo.likes.each do |like| %> 
+        <% if User.find(like.user_id) == nil %>
+        <p>yoyoy</p>
+        <i class="fa fa-heart-o"></i>
+        <% else %>
         <%= User.find(like.user_id).username %>
-        
-        <i class="fa fa-heart">
-          
-          
-        </i>
+        <i class="fa fa-heart"></i>
+        <i class="fa fa-heart-o"></i>
  
+        <% end %>
       <% end %>
+ 
+ 
+ 
+ 
+ 
  
     </td>
     <br />
