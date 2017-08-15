@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
     save_status = @comment.save
 
     if save_status == true
-      # render("photos/index.html.erb")
+
       # redirect_to("/comments/#{@comment.id}", :notice => "Comment created successfully.")
       redirect_to("/photos")
     else

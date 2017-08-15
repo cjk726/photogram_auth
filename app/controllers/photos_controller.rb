@@ -10,7 +10,18 @@ class PhotosController < ApplicationController
     
   def index
     @photos = Photo.all
-
+    
+  
+    if current_user != nil 
+      @user_id = current_user.id
+    end
+    
+    @comments = Comment.all
+    @comment = Comment.new
+    
+    @likes = Like.all
+    @like = Like.new
+    
     render("photos/index.html.erb")
   end
 
