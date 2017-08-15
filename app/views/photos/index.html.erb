@@ -25,6 +25,20 @@
         <td>
           <a href="/photos/<%= photo.id %>" class="btn btn-primary">Show</a>
         
+        <div class="panel-heading">
+        <h3 class="panel-title">
+          <% @user = User.find(photo.user_id) %>
+          <a href="/users/<%= @user.id %>"><%= @user.username %></a>
+          <small>
+            <%= time_ago_in_words(photo.created_at) %> ago
+          </small>
+        </h3>
+      </div>
+        
+        
+        
+        
+        
         <ul class="media-list">
 
         <% Comment.where(:photo_id => photo.id).each do |comment| %>
