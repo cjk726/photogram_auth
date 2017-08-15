@@ -1,0 +1,115 @@
+<div class="page-header">
+
+    <a href="/photos/new" class="btn btn-default btn-block">
+      <i class="fa fa-plus"></i>
+    </a>
+    
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Caption</th>
+        <th>Image</th>
+        <th>User</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @photos.each do |photo| %>
+      <tr>
+        <td><%= photo.caption %></td>
+        <td>
+          <img src="<%= photo.image %>" class="img-responsive">
+          </td>
+        <td><%= photo.user_id %></td>
+        <td>
+          <a href="/photos/<%= photo.id %>" class="btn btn-primary">Show</a>
+        
+        <div class="panel-heading">
+        <h3 class="panel-title">
+          <% @user = User.find(photo.user_id) %>
+          <a href="/users/<%= @user.id %>"><%= @user.username %></a>
+          <small>
+            <%= time_ago_in_words(photo.created_at) %> ago
+          </small>
+        </h3>
+    
+        </div>
+        
+        
+        
+        
+        
+        <ul class="media-list">
+
+        <% Comment.where(:photo_id => photo.id).each do |comment| %>
+          <% @user = User.find(comment.user_id) %></li>
+          <li><a href="/users/<%= comment.user_id %>"><%= @user.username %></a> <%= comment.body %></li>
+
+          <% end %>  
+          
+          
+          
+          <li class="media">
+            <div class="media-body">
+              <form action="/create_comment" method="post">
+                <!-- Hidden input for authenticity token to protect from forgery -->
+                <input name="authenticity_token" type="hidden" value="tdGtbeHN5W6fKjnRk+9Y7GmJci5ZXQTNCAtdrMTsIIb41YMwsrs564d58P74LtdLlOplUw1x+6//jnf2kTWF0A==">
+
+                <input type="hidden" name="photo_id" value="<%= photo.id %>">
+
+                <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+                <!-- Label and input for body -->
+                <div class="form-group">
+                  <label for="body" class="sr-only">
+                    Body
+                  </label>
+
+                  <div class="input-group">
+                    <input type="text" id="body" name="body" class="form-control" placeholder="Add a comment..." required>
+
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="submit">
+                        <i class="fa fa-commenting-o"></i>
+                      </button>
+                    </span>
+                  </div><!-- /input-group -->
+                </div>
+              </form>
+            </div>
+          </li>
+          
+          
+          
+          
+          
+          
+          
+        </ul>
+          
+          
+          
+          
+          
+          
+          
+          <% if current_user.id == photo.user_id %>
+            <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">
+            Edit
+            </a>
+            <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">
+            Delete
+            </a>
+            <% end %>
+          
+          <!--<a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">Edit</a>-->
+          <!--<a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">Delete</a>-->
+        
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
