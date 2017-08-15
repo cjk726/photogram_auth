@@ -18,10 +18,23 @@
       <% @photos.each do |photo| %>
       <tr>
         <td><%= photo.caption %></td>
-        <td><%= photo.image %></td>
+        <td>
+          <img src="<%= photo.image %>" class="img-responsive">
+          </td>
         <td><%= photo.user_id %></td>
         <td>
           <a href="/photos/<%= photo.id %>" class="btn btn-primary">Show</a>
+        
+        <ul class="media-list">
+
+        <% Comment.where(:photo_id => photo.id).each do |comment| %>
+          <% @user = User.find(comment.user_id) %></li>
+          <li><a href="/users/<%= comment.user_id %>"><%= @user.username %></a> <%= comment.body %></li>
+
+          <% end %>  
+          
+        </ul>
+          
           
           <% if current_user.id == photo.user_id %>
             <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">
